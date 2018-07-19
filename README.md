@@ -51,7 +51,7 @@ sudo nvidia-docker rmi nvidia/cuda
 ```
 jupyter notebook --allow-root
 ```
-* And then, check your __EXTERNAL_IP__ of a intance, enter like below on your web-browser (ex: `10.100.0.8`)
+* And then, check your __EXTERNAL_IP__ of a instance, enter like below on your web-browser (ex: `10.100.0.8`)
 ```
 10.100.0.8:8888
 ```
