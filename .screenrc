@@ -1,0 +1,9 @@
+defscrollback 5000
+termcapinfo xterm* ti@:te@
+startup_message off
+hardstatus on
+hardstatus alwayslastline
+hardstatus string "%{.bW}%-w%{.rW}%n*%t%{-}%+w %= %c ${USER}@%H"
+bindkey -k k1 select 0
+bindkey -k k2 select 1
+bindkey -k k3 select 2
