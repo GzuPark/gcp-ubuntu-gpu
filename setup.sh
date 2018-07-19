@@ -130,12 +130,18 @@ jupyter notebook --generate-config
 wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/jupyter_notebook_config.py
 chmod 666 jupyter_notebook_config.py
 mv jupyter_notebook_config.py .jupyter/
-chmod 666 .jupyter/
+chmod 777 .jupyter/
 
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 echo PATH=$PATH > /etc/environment
 echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /etc/environment
+
+# TODO: nvcc error with root account
+echo PATH=$PATH >> .bashrc
+echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> .bashrc
+echo PATH=$PATH >> /root/.bashrc
+echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /root/.bashrc
 
 # PyTorch
 pip install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
