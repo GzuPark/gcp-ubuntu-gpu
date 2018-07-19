@@ -17,7 +17,7 @@
 * Before you run this file, please check your OS __Ubuntu 16.04__.
 * You can modify this code if you want to use other OS or CUDA version.
 ```
-wget https://https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/setup.sh
+wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/setup.sh
 sudo bash
 bash setup.sh
 ```

@@ -127,7 +127,7 @@ python -m ipykernel.kernelspec
 
 # jupyter notebook
 jupyter notebook --generate-config
-wget https://https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/jupyter_notebook_config.py
+wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/jupyter_notebook_config.py
 chmod 666 jupyter_notebook_config.py
 mv jupyter_notebook_config.py .jupyter/
 chmod 666 .jupyter/
@@ -139,7 +139,7 @@ pip install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x8
 pip install torchvision
 
 # Screen setting
-wget https://https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/.screenrc
+wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/.screenrc
 chmod 666 .screen
 
 # download from a package
