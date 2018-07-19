@@ -189,4 +189,4 @@ python -c 'import torch; import sys; import os;\
                 print ("Available devices ", torch.cuda.device_count()); \
                 print ("Current cuda device ", torch.cuda.current_device())'
 
-rm setup-all.sh
+rm setup.sh
