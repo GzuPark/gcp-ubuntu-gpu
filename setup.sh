@@ -140,12 +140,14 @@ echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /etc/environment
 # TODO: nvcc error with root account
 echo PATH=$PATH >> .bashrc
 echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> .bashrc
+source .bashrc
 echo PATH=$PATH >> /root/.bashrc
 echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /root/.bashrc
+source /root/.bashrc
 
 # PyTorch
-pip install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
-pip install torchvision
+pip --no-cache-dir install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
+pip --no-cache-dir install torchvision
 
 # Screen setting
 wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/.screenrc
