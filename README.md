@@ -21,6 +21,12 @@ wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/setup.sh
 sudo bash
 bash setup.sh
 ```
+* After ending set up, please do like below:
+```
+# out from the root account
+exit
+source .bashrc
+```
 
 # Etc
 
