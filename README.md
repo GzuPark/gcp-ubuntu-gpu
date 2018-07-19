@@ -9,7 +9,7 @@
     * PyTorch: `0.4.0`
     * Other ML libraries
 * Programs:
-    * Anaconda: `5.2.0`, Python: `3.6.2` (is not default)
+    * Anaconda: `5.2.0`, Python: `3.6.5` (is not default)
     * nvidia-docker: `1.0.1`
 
 # How to use
