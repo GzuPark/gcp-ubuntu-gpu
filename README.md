@@ -46,6 +46,16 @@ sudo nvidia-docker run --rm nvidia/cuda nvidia-smi
 sudo nvidia-docker rmi nvidia/cuda
 ```
 
+## Jupyter
+* First, run this command:
+```
+jupyter notebook --allow-root
+```
+* And then, check your __EXTERNAL_IP__ of a intance, enter like below on your web-browser (ex: `10.100.0.8`)
+```
+10.100.0.8:8888
+```
+
 # Issues
 Please comment at the [Issues tap](https://github.com/GzuPark/gcp-ubuntu-gpu/issues).
 
