@@ -29,7 +29,7 @@ ln -s cuda-9.0 /usr/local/cuda
 echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
 echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
-export PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
+export PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
 
@@ -134,6 +134,9 @@ chmod 666 .jupyter/
 
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
+echo PATH=$PATH > /etc/environment
+echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /etc/environment
+
 # PyTorch
 pip install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
 pip install torchvision
@@ -164,7 +167,6 @@ rm nvidia-docker*.deb
 # nvidia-docker rmi nvidia/cuda
 
 apt-get update && \
-        # apt-get install -y --no-install-recommends nvidia-cuda-toolkit && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 
