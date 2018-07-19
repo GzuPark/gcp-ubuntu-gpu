@@ -13,8 +13,8 @@ apt-get update && apt-get install -y --no-install-recommends ca-certificates apt
         # echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
         echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
 
-CUDA_VERSION=9.0.176
-CUDA_PKG_VERSION=9-0=$CUDA_VERSION-1
+export CUDA_VERSION=9.0.176
+export CUDA_PKG_VERSION=9-0=$CUDA_VERSION-1
 
 apt-get update && apt-get install -y --no-install-recommends \
         cuda-cudart-$CUDA_PKG_VERSION
@@ -29,14 +29,14 @@ ln -s cuda-9.0 /usr/local/cuda
 echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
 echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
 
-PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
-LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
+export PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:${PATH}
+export LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
 
 # NCCL install
 # https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/runtime/Dockerfile
 
-NCCL_VERSION=2.2.13
+export NCCL_VERSION=2.2.13
 
 apt-get update && apt-get install -y --no-install-recommends \
         cuda-libraries-$CUDA_PKG_VERSION \
@@ -47,7 +47,7 @@ apt-get update && apt-get install -y --no-install-recommends \
 # CUDNN install
 # https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/runtime/cudnn7/Dockerfile
 
-CUDNN_VERSION=7.1.4.18
+export CUDNN_VERSION=7.1.4.18
 
 apt-get update && apt-get install -y --no-install-recommends \
         libcudnn7=$CUDNN_VERSION-1+cuda9.0
@@ -132,7 +132,7 @@ chmod 666 jupyter_notebook_config.py
 mv jupyter_notebook_config.py .jupyter/
 chmod 666 .jupyter/
 
-LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
+export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
 # PyTorch
 pip install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
@@ -164,7 +164,7 @@ rm nvidia-docker*.deb
 # nvidia-docker rmi nvidia/cuda
 
 apt-get update && \
-        apt-get install -y --no-install-recommends nvidia-cuda-toolkit && \
+        # apt-get install -y --no-install-recommends nvidia-cuda-toolkit && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
 
