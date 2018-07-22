@@ -1,3 +1,5 @@
+[[한국어 가이드]](https://medium.com/@jijupax/gcp-vm%EC%97%90%EC%84%9C-nvidia-gpu%EB%A5%BC-%EC%82%AC%EC%9A%A9%ED%95%B4%EB%B3%B4%EC%9E%90-d741e70365ac)
+
 # Quick Set Up NVIDIA GPUs with GCP VM
 * OS: `Ubuntu 16.04`
 * GPU: `NVIDIA K80, P100, V100`
