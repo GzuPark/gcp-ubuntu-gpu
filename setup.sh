@@ -77,6 +77,7 @@ apt-get update && apt-get install -y --no-install-recommends \
         pkg-config \
         rsync \
         software-properties-common \
+        python3-dev \
         python-tk3\
         unzip
 
