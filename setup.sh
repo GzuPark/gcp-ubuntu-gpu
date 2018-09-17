@@ -67,6 +67,7 @@ apt-get update && apt-get install -y --no-install-recommends \
         cuda-cusolver-9-0 \
         cuda-cusparse-9-0 \
         curl \
+        cmake \
         libcudnn7=7.1.4.18-1+cuda9.0 \
         libnccl2=2.2.13-1+cuda9.0 \
         libfreetype6-dev \
@@ -122,6 +123,8 @@ pip --no-cache-dir install \
         pandas \
         scipy \
         sklearn \
+        opencv-python \
+        scikit-image \
         tensorflow-gpu==1.9.0
 
 python -m ipykernel.kernelspec
