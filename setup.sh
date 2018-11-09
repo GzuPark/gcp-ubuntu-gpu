@@ -93,11 +93,11 @@ apt-get update && apt-get install -y --no-install-recommends \
 # latest version
 # https://repo.continuum.io/archive/
 apt-get update
-curl -O https://repo.continuum.io/archive/Anaconda3-5.2.0-Linux-x86_64.sh
+curl -O https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
 
 # recommend install directory
 # /usr/bin/anaconda3
-bash ./Anaconda3-5.2.0-Linux-x86_64.sh -p /usr/bin/anaconda3 -b
+bash ./Anaconda3-5.3.0-Linux-x86_64.sh -p /usr/bin/anaconda3 -b
 
 # if you want to change default python
 ln -s -f /usr/bin/python3 /usr/bin/python
@@ -126,7 +126,7 @@ pip --no-cache-dir install \
         sklearn \
         opencv-python \
         scikit-image \
-        tensorflow-gpu==1.9.0
+        tensorflow-gpu
 
 python -m ipykernel.kernelspec
 
@@ -151,8 +151,9 @@ echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /root/.bashrc
 source /root/.bashrc
 
 # PyTorch
-pip --no-cache-dir install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
-pip --no-cache-dir install torchvision
+# pip --no-cache-dir install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
+# pip --no-cache-dir install torchvision
+pip --no-cache-dir install torch torchvision
 
 # Screen setting
 wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/.screenrc
