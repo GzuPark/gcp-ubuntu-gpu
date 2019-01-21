@@ -1,8 +1,8 @@
-#!/bin/sh
+#!/bin/bash
 
 # Install NVIDIA drivers
-sudo apt-get update && sudo add-apt-repository ppa:graphics-drivers/ppa -y && \
-sudo apt-get update && sudo apt-get install nvidia
+# sudo apt-get update && sudo add-apt-repository ppa:graphics-drivers/ppa -y && \
+# sudo apt-get update && sudo apt-get install nvidia
 
 # Check for CUDA and try to install.
 # https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/base/Dockerfile
@@ -107,7 +107,7 @@ ln -s -f /usr/bin/anaconda3/bin/conda /usr/bin/conda
 
 curl -O https://bootstrap.pypa.io/get-pip.py && \
         python get-pip.py && \
-        rm get-pip.py
+        sudo rm get-pip.py
 
 pip --no-cache-dir install \
         msgpack \
@@ -153,7 +153,7 @@ wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/.screenrc
 
 # Install docker-ce
 # https://docs.docker.com/install/linux/docker-ce/ubuntu/
-sudo apt-get update && sudo apt-get install \
+sudo apt-get update && sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
     curl \
@@ -168,7 +168,7 @@ sudo add-apt-repository -y \
    $(lsb_release -cs) \
    stable"
 
-sudo apt-get update && sudo apt-get install docker-ce
+sudo apt-get update && sudo apt-get install -y docker-ce
 
 # Install nvidia-docker
 # https://github.com/NVIDIA/nvidia-docker/README.md
@@ -193,9 +193,8 @@ apt-get update && \
         rm -rf /var/lib/apt/lists/*
 
 # Test
-sudo docker run --rm nvidia/cuda nvidia-smi
-sudo docker rmi nvidia/cuda
-
+# sudo docker run --rm nvidia/cuda nvidia-smi
+# sudo docker rmi nvidia/cuda
 python -c 'import tensorflow as tf; \
                 print("__TensorFlow GPU device"); \
                 tf.test.gpu_device_name()'
