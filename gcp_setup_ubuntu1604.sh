@@ -1,44 +1,44 @@
 #!/bin/bash
 
+# Install NVIDIA drivers
+sudo apt-get update && sudo add-apt-repository ppa:graphics-drivers/ppa && \
+sudo apt-get update && sudo apt-get install nvidia
+
 # Check for CUDA and try to install.
 # https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/base/Dockerfile
-
-apt-get update && apt-get install -y --no-install-recommends ca-certificates apt-transport-https gnupg-curl && \
-        rm -rf /var/lib/apt/lists/* && \
-        NVIDIA_GPGKEY_SUM=d1be581509378368edeec8c1eb2958702feedf3bc3d17011adbf24efacce4ab5 && \
-        NVIDIA_GPGKEY_FPR=ae09fe4bbd223a84b2ccfce3f60f4b3d7fa2af80 && \
-        apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub && \
-        apt-key adv --export --no-emit-version -a $NVIDIA_GPGKEY_FPR | tail -n +5 > cudasign.pub && \
-        echo "$NVIDIA_GPGKEY_SUM  cudasign.pub" | sha256sum -c --strict - && rm cudasign.pub && \
-        # echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/cuda.list && \
-        echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list
+sudo apt-get update && sudo apt-get install -y --no-install-recommends ca-certificates apt-transport-https gnupg-curl && sudo rm -rf /var/lib/apt/lists/* && \
+NVIDIA_GPGKEY_SUM=d1be581509378368edeec8c1eb2958702feedf3bc3d17011adbf24efacce4ab5 && \
+NVIDIA_GPGKEY_FPR=ae09fe4bbd223a84b2ccfce3f60f4b3d7fa2af80 && \
+sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub && \
+sudo apt-key adv --export --no-emit-version -a $NVIDIA_GPGKEY_FPR | tail -n +5 > cudasign.pub && \
+sudo sh -c 'echo "$NVIDIA_GPGKEY_SUM  cudasign.pub"' | sha256sum -c --strict - && sudo rm cudasign.pub && \
+sudo sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/cuda.list' && \
+sudo sh -c 'echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list'
 
 export CUDA_VERSION=9.0.176
 export CUDA_PKG_VERSION=9-0=$CUDA_VERSION-1
 
-apt-get update && apt-get install -y --no-install-recommends \
+sudo apt-get update && apt-get install -y --no-install-recommends \
         cuda-cudart-$CUDA_PKG_VERSION
 
 curl -O http://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/cuda-repo-ubuntu1604_${CUDA_VERSION}-1_amd64.deb
-dpkg -i ./cuda-repo-ubuntu1604_${CUDA_VERSION}-1_amd64.deb
-apt-get update && apt-get install -y --no-install-recommends cuda=${CUDA_VERSION}-1
-rm ./cuda-repo-ubuntu1604_${CUDA_VERSION}-1_amd64.deb
+sudo dpkg -i ./cuda-repo-ubuntu1604_${CUDA_VERSION}-1_amd64.deb
+sudo apt-get update && sudo apt-get install -y --no-install-recommends cuda=${CUDA_VERSION}-1
+sudo rm ./cuda-repo-ubuntu1604_${CUDA_VERSION}-1_amd64.deb
 
 ln -s cuda-9.0 /usr/local/cuda
 
-echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf
-echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf
+sudo sh -c 'echo "/usr/local/nvidia/lib" >> /etc/ld.so.conf.d/nvidia.conf'
+sudo sh -c 'echo "/usr/local/nvidia/lib64" >> /etc/ld.so.conf.d/nvidia.conf'
 
 export PATH=/usr/local/nvidia/bin:/usr/local/cuda/bin:$PATH
 export LD_LIBRARY_PATH=/usr/local/nvidia/lib:/usr/local/nvidia/lib64
 
-
 # NCCL install
 # https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/runtime/Dockerfile
-
 export NCCL_VERSION=2.2.13
 
-apt-get update && apt-get install -y --no-install-recommends \
+sudo apt-get update && sudo apt-get install -y --no-install-recommends \
         cuda-libraries-$CUDA_PKG_VERSION \
         cuda-cublas-9-0=9.0.176.3-1 \
         libnccl2=$NCCL_VERSION-1+cuda9.0
@@ -46,19 +46,16 @@ apt-get update && apt-get install -y --no-install-recommends \
 
 # CUDNN install
 # https://gitlab.com/nvidia/cuda/blob/ubuntu16.04/9.0/runtime/cudnn7/Dockerfile
-
 export CUDNN_VERSION=7.1.4.18
 
-apt-get update && apt-get install -y --no-install-recommends \
+sudo apt-get update && sudo apt-get install -y --no-install-recommends \
         libcudnn7=$CUDNN_VERSION-1+cuda9.0
 
-rm -rf /var/lib/apt/lists/*
-
+sudo rm -rf /var/lib/apt/lists/*
 
 # Tensorflow
 # https://github.com/tensorflow/tensorflow/blob/master/tensorflow/tools/docker/Dockerfile.gpu
-
-apt-get update && apt-get install -y --no-install-recommends \
+sudo apt-get update && sudo apt-get install -y --no-install-recommends \
         build-essential \
         cuda-command-line-tools-9-0 \
         cuda-cublas-9-0 \
@@ -92,12 +89,13 @@ apt-get update && apt-get install -y --no-install-recommends \
 # Default: Anaconda3
 # latest version
 # https://repo.continuum.io/archive/
-apt-get update
-curl -O https://repo.continuum.io/archive/Anaconda3-5.3.0-Linux-x86_64.sh
+sudo apt-get update
+curl -O https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.sh
 
 # recommend install directory
 # /usr/bin/anaconda3
 bash ./Anaconda3-5.3.0-Linux-x86_64.sh -p /usr/bin/anaconda3 -b
+sudo rm ./Anaconda3*.sh
 
 # if you want to change default python
 ln -s -f /usr/bin/python3 /usr/bin/python
@@ -106,8 +104,6 @@ ln -s -f /usr/bin/python3 /usr/bin/python
 # ln -s -f /usr/bin/anaconda3/bin/jupyter /usr/bin/jupyter
 # conda set up
 ln -s -f /usr/bin/anaconda3/bin/conda /usr/bin/conda
-
-rm ./Anaconda3*.sh
 
 curl -O https://bootstrap.pypa.io/get-pip.py && \
         python get-pip.py && \
@@ -126,63 +122,79 @@ pip --no-cache-dir install \
         sklearn \
         opencv-python \
         scikit-image \
-        tensorflow-gpu
+        tensorflow-gpu \ 
+        torch \
+        torchvision
 
 python -m ipykernel.kernelspec
 
 # jupyter notebook
 jupyter notebook --generate-config
 wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/jupyter_notebook_config.py
-chmod 666 jupyter_notebook_config.py
+# chmod 666 jupyter_notebook_config.py
 mv jupyter_notebook_config.py .jupyter/
-chmod 777 .jupyter/
+# chmod 777 .jupyter/
 
 export LD_LIBRARY_PATH=/usr/local/cuda/extras/CUPTI/lib64:$LD_LIBRARY_PATH
 
-echo PATH=$PATH > /etc/environment
-echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /etc/environment
+sudo sh -c 'echo PATH=$PATH > /etc/environment'
+sudo sh -c 'echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /etc/environment'
 
-# TODO: nvcc error with root account
 echo PATH=$PATH >> .bashrc
 echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> .bashrc
 source .bashrc
-echo PATH=$PATH >> /root/.bashrc
-echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /root/.bashrc
-source /root/.bashrc
-
-# PyTorch
-# pip --no-cache-dir install http://download.pytorch.org/whl/cu90/torch-0.4.0-cp35-cp35m-linux_x86_64.whl
-# pip --no-cache-dir install torchvision
-pip --no-cache-dir install torch torchvision
+# echo PATH=$PATH >> /root/.bashrc
+# echo LD_LIBRARY_PATH=$LD_LIBRARY_PATH >> /root/.bashrc
+# source /root/.bashrc
 
 # Screen setting
 wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/.screenrc
-chmod 666 .screen
+# chmod 666 .screen
 
-# download from a package
-# https://docs.docker.com/install/linux/docker-ce/ubuntu/#install-from-a-package
-# https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/
-wget https://download.docker.com/linux/ubuntu/dists/xenial/pool/stable/amd64/docker-ce_18.06.0~ce~3-0~ubuntu_amd64.deb
-wget https://github.com/NVIDIA/nvidia-docker/releases/download/v1.0.1/nvidia-docker_1.0.1-1_amd64.deb
+# Install docker-ce
+# https://docs.docker.com/install/linux/docker-ce/ubuntu/
+sudo apt-get update && sudo apt-get install \
+    apt-transport-https \
+    ca-certificates \
+    curl \
+    gnupg2 \
+    software-properties-common
 
-dpkg -i docker-ce_*.deb
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
+sudo apt-key fingerprint 0EBFCD88
 
-# https://github.com/jenkinsci/docker/issues/506#issuecomment-305867728
-apt-get update && apt-get install -y libltdl7 && \
-        rm -rf /var/lib/apt/lists/*
+sudo add-apt-repository \
+   "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
+   $(lsb_release -cs) \
+   stable"
 
-dpkg -i nvidia-docker*.deb
+sudo apt-get update && sudo apt-get install docker-ce
 
-rm docker*.deb
-rm nvidia-docker*.deb
+# Install nvidia-docker
+# https://github.com/NVIDIA/nvidia-docker/README.md
+# Add the package repositories
+curl -s -L https://nvidia.github.io/nvidia-docker/gpgkey | sudo apt-key add -
+distribution=$(. /etc/os-release;echo $ID$VERSION_ID)
+curl -s -L https://nvidia.github.io/nvidia-docker/$distribution/nvidia-docker.list | sudo tee /etc/apt/sources.list.d/nvidia-docker.list
+sudo apt-get update
 
-# Test Run: nvidia-docker
-# nvidia-docker run --rm nvidia/cuda nvidia-smi
-# nvidia-docker rmi nvidia/cuda
+# Install nvidia-docker2 and reload the Docker daemon configuration
+sudo apt-get install -y nvidia-docker2
+sudo pkill -SIGHUP dockerd
+
+# Manage Docker as a non-root user
+# https://docs.docker.com/install/linux/linux-postinstall/
+sudo groupadd docker
+sudo usermod -aG docker $USER
+# it will work after re-login
 
 apt-get update && \
         apt-get clean && \
         rm -rf /var/lib/apt/lists/*
+
+# Test
+sudo docker run --rm nvidia/cuda nvidia-smi
+sudo docker rmi nvidia/cuda
 
 python -c 'import tensorflow as tf; \
                 print("__TensorFlow GPU device"); \
@@ -205,4 +217,4 @@ python -c 'import torch; import sys; import os;\
                 print ("Available devices ", torch.cuda.device_count()); \
                 print ("Current cuda device ", torch.cuda.current_device())'
 
-rm setup.sh
+rm gcp_setup_ubuntu1604.sh
