@@ -11,7 +11,7 @@ NVIDIA_GPGKEY_SUM=d1be581509378368edeec8c1eb2958702feedf3bc3d17011adbf24efacce4a
 NVIDIA_GPGKEY_FPR=ae09fe4bbd223a84b2ccfce3f60f4b3d7fa2af80 && \
 sudo apt-key adv --fetch-keys https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64/7fa2af80.pub && \
 sudo apt-key adv --export --no-emit-version -a $NVIDIA_GPGKEY_FPR | tail -n +5 > cudasign.pub && \
-sudo sh -c 'echo "$NVIDIA_GPGKEY_SUM  cudasign.pub"' | sha256sum -c --strict - && sudo rm cudasign.pub && \
+echo "$NVIDIA_GPGKEY_SUM  cudasign.pub" | sha256sum -c --strict - && sudo rm cudasign.pub && \
 sudo sh -c 'echo "deb https://developer.download.nvidia.com/compute/cuda/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/cuda.list' && \
 sudo sh -c 'echo "deb https://developer.download.nvidia.com/compute/machine-learning/repos/ubuntu1604/x86_64 /" > /etc/apt/sources.list.d/nvidia-ml.list'
 
@@ -98,15 +98,15 @@ bash ./Anaconda3-5.3.0-Linux-x86_64.sh -p /usr/bin/anaconda3 -b
 sudo rm ./Anaconda3*.sh
 
 # if you want to change default python
-ln -s -f /usr/bin/python3 /usr/bin/python
+sudo ln -s -f /usr/bin/python3 /usr/bin/python
 # ln -s -f /usr/bin/anaconda3/bin/python3 /usr/bin/python
 # ln -s -f /usr/bin/anaconda3/bin/pip /usr/bin/pip
 # ln -s -f /usr/bin/anaconda3/bin/jupyter /usr/bin/jupyter
 # conda set up
-ln -s -f /usr/bin/anaconda3/bin/conda /usr/bin/conda
+sudo ln -s -f /usr/bin/anaconda3/bin/conda /usr/bin/conda
 
 curl -O https://bootstrap.pypa.io/get-pip.py && \
-        python get-pip.py && \
+        sudo python get-pip.py && \
         sudo rm get-pip.py
 
 pip --no-cache-dir install \
@@ -190,7 +190,7 @@ sudo usermod -aG docker $USER
 
 apt-get update && \
         apt-get clean && \
-        rm -rf /var/lib/apt/lists/*
+        sudo rm -rf /var/lib/apt/lists/*
 
 # Test
 # sudo docker run --rm nvidia/cuda nvidia-smi
