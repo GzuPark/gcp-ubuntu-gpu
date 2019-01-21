@@ -1,5 +1,6 @@
 #!/bin/bash
 
+
 # Install NVIDIA drivers
 # sudo apt-get update && sudo add-apt-repository ppa:graphics-drivers/ppa -y && \
 # sudo apt-get update && sudo apt-get install nvidia
@@ -94,7 +95,7 @@ curl -O https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.sh
 
 # recommend install directory
 # /usr/bin/anaconda3
-bash ./Anaconda3-5.3.0-Linux-x86_64.sh -p /usr/bin/anaconda3 -b
+bash ./Anaconda3-5.3.1-Linux-x86_64.sh -p /usr/bin/anaconda3 -b
 sudo rm ./Anaconda3*.sh
 
 # if you want to change default python
@@ -106,7 +107,7 @@ sudo ln -s -f /usr/bin/python3 /usr/bin/python
 sudo ln -s -f /usr/bin/anaconda3/bin/conda /usr/bin/conda
 
 curl -O https://bootstrap.pypa.io/get-pip.py && \
-        sudo python get-pip.py && \
+        sudo python get-pip.py --user && \
         sudo rm get-pip.py
 
 pip --no-cache-dir install \
