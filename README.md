@@ -20,7 +20,7 @@
 * You can modify this code if you want to use other OS or CUDA version.
 ```
 wget https://raw.githubusercontent.com/GzuPark/gcp-ubuntu-gpu/master/gcp_setup_ubuntu1604.sh
-./gcp_setup_ubuntu1604.sh
+bash gcp_setup_ubuntu1604.sh
 ```
 
 # Etc
