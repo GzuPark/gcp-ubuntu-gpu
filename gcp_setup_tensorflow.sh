@@ -13,7 +13,7 @@ conda list && sudo rm ./Miniconda3*.sh
 
 # if you want to change default python
 sudo ln -s -f /usr/bin/python3 /usr/bin/python
-sudo ln -s -f /usr/bin/anaconda3/bin/conda /usr/bin/conda
+sudo ln -s -f /usr/bin/miniconda3/bin/conda /usr/bin/conda
 
 curl -O https://bootstrap.pypa.io/get-pip.py && \
         sudo python get-pip.py --user && \
