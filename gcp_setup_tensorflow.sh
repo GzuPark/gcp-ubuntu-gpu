@@ -1,15 +1,15 @@
-#!/bin/bash
+#!/bin/sh
 
-# Default: Anaconda3
+# Default: Miniconda3
 # latest version
-# https://repo.continuum.io/archive/
+# https://conda.io/en/latest/miniconda.html
 sudo apt-get update
-curl -O https://repo.continuum.io/archive/Anaconda3-5.3.1-Linux-x86_64.sh
+curl -O https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh
 
 # recommend install directory
 # /usr/bin/anaconda3
-bash ./Anaconda3-5.3.1-Linux-x86_64.sh -p /usr/bin/anaconda3 -b
-sudo rm ./Anaconda3*.sh
+sudo bash ./Miniconda3-latest-Linux-x86_64.sh -p /usr/bin/miniconda3 -b
+conda list && sudo rm ./Miniconda3*.sh
 
 # if you want to change default python
 sudo ln -s -f /usr/bin/python3 /usr/bin/python
